@@ -47,13 +47,24 @@ def click(n,count=1):
     x,y=r[0]+r[2]//2,r[1]+r[3]//2
     assert 0<=x<1600 and 0<=y<1000,'Control is outside the hosted screen'
     cmd('xdotool','mousemove',str(x),str(y));cmd('xdotool','click','--repeat',str(count),'--delay','150','1');time.sleep(.5)
+def unique_screen(items):
+    # R2 exposes identical native controls through both tab subtrees. Collapse
+    # only the same role/name/description at the exact same screen rectangle.
+    # Different physical locations remain ambiguous; raw snapshots retain all.
+    result=[];seen=set()
+    for n in items:
+        r=rect(n)
+        if r is None:continue
+        key=(n.getRoleName(),n.name,n.description,tuple(r))
+        if key not in seen:seen.add(key);result.append(n)
+    return result
 def matching(name,role=None):
     found=[]
     for n,_ in nodes():
         try:
             if n.name==name and (role is None or n.getRoleName() in role) and n.getState().contains(pyatspi.STATE_SHOWING):found.append(n)
         except Exception:pass
-    return found
+    return unique_screen(found)
 def one(name,roles=None,seconds=20):
     deadline=time.monotonic()+seconds
     while time.monotonic()<deadline:
@@ -85,9 +96,7 @@ def configure():
         click(one('Next >',['push button']))
     raise AssertionError('Unexpected product-configuration page sequence')
 def open_table():
-    deadline=time.monotonic()+40
-    while not matching('Database Navigator') and time.monotonic()<deadline:time.sleep(.3)
-    assert matching('Database Navigator'),'Native navigator did not appear'
+    one('Connections',['page tab'],seconds=40)
     for _ in range(12):
         found=matching('source_table',['table cell','tree item'])
         if found:
@@ -107,6 +116,7 @@ def open_table():
         try:
             if n.description=='Results grid' and n.getState().contains(pyatspi.STATE_SHOWING):grids.append(n)
         except Exception:pass
+    grids=unique_screen(grids)
     assert len(grids)==1,'One actual native Results grid is required'
     grid=grids[0];r=rect(grid);assert r and r[2]>100 and r[3]>70
     subprocess.run(['xclip','-selection','clipboard'],input='GRIDPASS_PENDING',text=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,check=True,timeout=10)
