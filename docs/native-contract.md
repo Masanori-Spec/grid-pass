@@ -8,8 +8,10 @@ or account-backed project sync is a different existing route. This proposal
 addresses only explicit entry-to-entry transfer of selected layout properties.
 No exhaustive uniqueness claim is made.
 
-The bounded GUI/SQLite bootstrap passed. The current workflow attempts the full
-layout gate below. Product UI stays locked until the actual full evidence passes.
+The bounded GUI/SQLite bootstrap and full native core gate passed (see
+[native-checkpoint.md](native-checkpoint.md)). The UI workflow repeats the full
+layout gate below with its actual downloaded XML. UI completion remains gated
+on that fresh browser and native evidence.
 
 ## Required full gate
 

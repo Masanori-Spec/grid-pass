@@ -1,7 +1,10 @@
-# GridPass native layout feasibility gate
+# GridPass
 
-A source-only implementation for transferring selected DBeaver table-layout
-settings. There is no product UI or completed layout-compatibility claim yet.
+An offline JA/EN tool for selected saved-layout transfer. Open
+`dist/grid-pass.html` locally, choose explicit source and target XML files and
+existing entries, review the changes, then download a new target copy and receipt.
+The native core gate is accepted; this UI candidate still awaits its hosted
+browser, visual and actual-download native verification.
 
 The core accepts explicit saved-data-filter.xml bytes and selected source/target
 entry IDs. It transfers only column position, visibility, pinning and sort
@@ -37,8 +40,10 @@ preservation sentinels. After normal close, the production core patches only the
 existing target entry. The unchanged native file loader must show exact target
 rows/column order, save, exit and reload in a fresh process. Visibility, position,
 pin and sort fault controls must each show their precise native effect and fail
-the positive oracle. This full gate remains pending execution and independent
-evidence review. It must pass before product UI work.
+the positive oracle. This full native gate passed at
+[run 37571921415, attempt 2](https://github.com/Masanori-Spec/grid-pass/actions/runs/37571921415/attempts/2).
+See [the exact native checkpoint and failed-attempt history](docs/native-checkpoint.md).
+The UI candidate still requires a fresh actual-browser-output native pass.
 
 The test opens only original synthetic SQLite fixtures in the hosted runner.
 Official binaries and the compiler output remain test-only and are excluded
@@ -47,7 +52,7 @@ endpoint for arbitrary user files. See [the full contract](docs/native-contract.
 
 ## Supported core profile
 
-Run `npm ci --ignore-scripts` and `npm test` for 74 core checks. Run
+Run `npm ci --ignore-scripts` and `npm test` for 75 core checks. Run
 `python3 scripts/verify-layout.py selftest` for the independent protected-byte
 oracle's nine fault controls. Inputs require
 XML 1.0/UTF-8, at most 4 MiB per file, bounded XML depth/elements, and at most 256
@@ -70,3 +75,22 @@ Original code and
 synthetic fixture content have no reuse license grant. Existing third-party
 ownership notices apply only to their dependencies:
 [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
+
+## Offline UI candidate
+
+Files are processed in the browser without database access, network requests,
+workspace scanning or native software execution. Choose each entry explicitly.
+The review shows zero-based positions and pin indices, visibility, sort priority
+and direction, before/after visible order, and the exact selected identities.
+Changes invalidate prior confirmation and receipts; delayed imports and hash
+jobs cannot restore an older selection. The clean offline-tool download omits
+imported files and names. Printing includes the selected identities and columns.
+
+The browser workflow checks sandboxed Chrome, JA/EN desktop and 320/390px layouts,
+keyboard actions, blocked input and asynchronous races, print output and an
+offline reopen. Its actual XML download is passed byte-for-byte into the official
+DBeaver synthetic GUI gate, including fresh native authoring and all four fault
+controls. This candidate's runtime and screenshots are not yet accepted.
+
+Build with `npm run build`; run `npm run verify` for the core plus reproducible
+standalone build. Browser/native execution belongs in the hosted workflows.

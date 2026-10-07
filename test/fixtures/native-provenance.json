@@ -1,0 +1,11 @@
+{
+  "source": "Official DBeaver CE26.2.2 GUI-authored original synthetic fixture",
+  "commit": "98af7fe469531006b24bf7fce4b53373a702caa6",
+  "run": 37571921415,
+  "attempt": 2,
+  "artifact": 11461871792,
+  "artifactSHA256": "fe28577ae7b26ef84aef8cddbe3b78d76d06c97f0f19dd91f5c1611f3c2f3260",
+  "member": "original-saved-data-filter.xml",
+  "sha256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "license": "No original fixture reuse license grant"
+}

@@ -273,7 +273,11 @@ try:
     author_exit=close_run(proc,log);proc=None;log=None
     config=configuration_path();shutil.copyfile(config,BASE_ART/'original-saved-data-filter.xml')
     (BASE_ART/'configuration-location.json').write_text(json.dumps({'relativeToDisposableRoot':str(config.relative_to(ROOT)),'authorExit':author_exit},indent=2)+'\n')
-    cmd('node',str(PROJECT/'scripts/prepare-layout.mjs'))
+    if os.environ.get('GRIDPASS_BROWSER_INPUT')=='1':
+        (BASE_ART/'variants').mkdir(exist_ok=True)
+        cmd('node',str(PROJECT/'scripts/prepare-browser-layout.mjs'))
+    else:
+        cmd('node',str(PROJECT/'scripts/prepare-layout.mjs'))
     cmd('/usr/bin/python3',str(PROJECT/'scripts/verify-layout.py'),'inputs')
     for mode,(columns,rows,order) in EXPECTED.items():
         if mode!='positive-reloaded':shutil.copyfile(BASE_ART/'variants'/f'{mode}.xml',config)

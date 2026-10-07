@@ -140,3 +140,14 @@ for(const mode of ['repeated-open','unterminated-comment','unterminated-cdata','
  const child=spawnSync(process.execPath,['--max-old-space-size=128','--input-type=module','--eval',program],{timeout:5000,maxBuffer:16384});
  assert.equal(child.error,undefined,`${mode}: ${child.error}`);assert.equal(child.status,0,`${mode}: ${child.stderr}`);
 });
+
+test('Actual GUI-authored fixture retains every protected byte and literal native layout',()=>{
+ const original=readFileSync(new URL('./fixtures/native-authored.xml',import.meta.url));
+ const hash=b=>createHash('sha256').update(b).digest('hex');
+ assert.equal(hash(original),'81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4');
+ const result=transferLayout(original,original,'GridPass Fixture@@/@@source_table','GridPass Fixture@@/@@target_table');
+ assert.equal(hash(result.bytes),'e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639');
+ assert.equal(hash(original),'81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4');
+ assert.equal((text(result.bytes).match(/isPseudoAttribute="false"/g)||[]).length,12);
+ assert(text(result.bytes).includes('typeName="VARCHAR"'));
+});
