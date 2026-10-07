@@ -42,3 +42,15 @@ verification backup. There is no automatic retry loop or suppressed fatal exit.
 This checkpoint verifies the core with original synthetic fixtures. The offline
 UI candidate and its actual browser download require their own fresh browser and
 native acceptance before a completed product claim.
+
+During the UI candidate's separate native-only run `37575833476`, another fresh
+startup failed in `g_type_check_instance_is_a` after the first positive save.
+The raw artifact `11462377540` has SHA-256
+`8b5b84362b769c9d76b03636e56eef3255449d07c52f72377d0c3a0878e6ac8f`.
+No identical retry was requested. The next harness waits for one stable X11
+window before querying accessibility (at least 12 seconds since launch and six
+seconds of unchanged window identity/title/geometry, capped at 60 seconds).
+This is a bounded timing experiment; the native crash trigger is unproven.
+Fatal logs or unexpected process exit still fail. Failure diagnostics retain
+only runtime identity and current-thread frame lines, excluding raw crash
+reports, registers, memory dumps and environment data.

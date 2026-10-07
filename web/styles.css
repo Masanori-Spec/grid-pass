@@ -3,3 +3,4 @@
 .review-identities{display:grid;grid-template-columns:auto 1fr;gap:5px 15px;margin:0 0 22px;font-size:10px;color:var(--muted)}.review-identities dt{font-weight:700}.review-identities dd{margin:0;overflow-wrap:anywhere;font-family:ui-monospace,monospace}
 
 .choose-file{width:100%;text-align:left;font-size:12px;padding:11px 12px;border-style:dashed;background:white}.choose-file:after{content:"↗";float:right;color:var(--green)}
+@media(max-width:360px){html[lang=ja] .intro h1{font-size:24px}html[lang=ja] .scope>span{float:none;margin:0 0 10px}}

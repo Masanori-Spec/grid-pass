@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real native GUI authoring and layout-consumption gate; fixed synthetic inputs only."""
 from pathlib import Path
-import json, os, sqlite3, subprocess, time, traceback, shutil
+import json, os, sqlite3, subprocess, time, traceback, shutil, re
 import pyatspi
 
 PROJECT=Path(__file__).resolve().parents[1]
@@ -75,6 +75,7 @@ def matching(name,role=None,scope=None):
 def one(name,roles=None,seconds=20,scope=None):
     deadline=time.monotonic()+seconds
     while time.monotonic()<deadline:
+        if globals().get('LIVE_PROC') is not None:assert_native_alive(LIVE_PROC)
         found=matching(name,roles,scope)
         if len(found)==1:return found[0]
         time.sleep(.25)
@@ -217,6 +218,64 @@ def observe_settings(label,expected_order):
     dialog=settings();rows=dialog_rows(dialog)
     assert [r['name'] for r in rows]==expected_order
     snapshot(label);click(one('Cancel',['push button'],scope=dialog));return rows
+def assert_native_alive(proc):
+    assert proc.poll() is None,f'Native process exited unexpectedly: {proc.returncode}'
+    path=ART/'dbeaver.log'
+    if path.exists():
+        with path.open('rb') as stream:
+            stream.seek(max(0,path.stat().st_size-16384));tail=stream.read(16384)
+        assert b'A fatal error has been detected' not in tail,'Fatal native runtime marker detected'
+def x_window_snapshot():
+    # X11 queries only: no AT-SPI traversal while SWT restores its widget tree.
+    result=subprocess.run(['xdotool','search','--onlyvisible','--name','^DBeaver'],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5)
+    assert result.returncode in [0,1],f'X-window query failed: {result.stderr}'
+    ids=result.stdout.splitlines()
+    if len(ids)!=1:return None
+    identity=ids[0];assert identity.isdigit()
+    results=[]
+    for args in [('getwindowname',identity),('getwindowgeometry','--shell',identity)]:
+        query=subprocess.run(['xdotool',*args],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5)
+        if query.returncode==1:return None # Window replaced during startup; process guard still applies.
+        assert query.returncode==0,f'X-window detail query failed: {query.stderr}'
+        results.append(query.stdout)
+    title,geometry=results;title=title.strip()
+    fields=dict(line.split('=',1) for line in geometry.splitlines() if '=' in line)
+    if int(fields.get('WIDTH','0'))<500 or int(fields.get('HEIGHT','0'))<300:return None
+    return {'windowId':identity,'title':title,'geometry':geometry}
+def wait_native_window(proc):
+    started=time.monotonic();deadline=started+60;previous=None;stable_since=None
+    while time.monotonic()<deadline:
+        assert_native_alive(proc);observed=x_window_snapshot();now=time.monotonic()
+        if now>=deadline:break
+        if observed is None or observed!=previous:stable_since=now if observed else None
+        previous=observed
+        if observed and now-started>=12 and stable_since is not None and now-stable_since>=6:
+            record={'method':'X11 window identity/title/geometry before accessibility traversal','elapsedSeconds':round(now-started,3),'minimumStartupSeconds':12,'minimumStableWindowSeconds':6,'timeoutSeconds':60,'window':observed,'scope':'Timing experiment after native startup crashes; trigger and causality are not established'}
+            (ART/'startup-readiness.json').write_text(json.dumps(record,indent=2)+'\n');return
+        time.sleep(.5)
+    raise AssertionError('Native X-window did not settle within the bounded startup window')
+def crash_excerpt(text):
+    # Deliberate allowlist. Never retain registers, arbitrary memory, command
+    # lines, environment, process mappings, or the raw hs_err/core payload.
+    lines=[];frames=False
+    for line in text.splitlines():
+        if line.startswith(('siginfo:','Registers:','Register to memory','Top of Stack:','Stack slot','Environment Variables:')) or 'P R O C E S S' in line:break
+        if line.startswith(('#  SIG','# JRE version:','# Java VM:','# Problematic frame:','# C  [','# V  [')):lines.append(line)
+        if line.startswith('Current thread '):lines.append(line)
+        if line.startswith(('Native frames:','Java frames:')):
+            frames=True;lines.append(line);continue
+        if frames:
+            if re.match(r'^[CVJjv]\s+',line):lines.append(line)
+            else:frames=False
+    return lines[:160]
+def capture_crash_stacks():
+    records=[]
+    for path in sorted(PROJECT.glob('hs_err_pid*.log'))[:8]:
+        if path.is_symlink() or not path.is_file():continue
+        with path.open('rb') as stream:prefix=stream.read(256*1024)
+        excerpt=crash_excerpt(prefix.decode(errors='replace'))
+        if excerpt:records.append({'file':path.name,'sourceBytes':path.stat().st_size,'retainedLines':excerpt})
+    if records:(ART/'native-crash-stacks.json').write_text(json.dumps({'scope':'Runtime identity and current-thread frame lines only; raw reports/core dumps excluded','records':records},indent=2)+'\n')
 def launch(first,phase):
     global ART,LIVE_PROC,LIVE_LOG
     ART=BASE_ART/phase;ART.mkdir(parents=True,exist_ok=True)
@@ -226,13 +285,15 @@ def launch(first,phase):
     args+=['-vmargs',f'-Duser.home={HOME_DIR}',f'-Ddbeaver.drivers.configuration-file={DRIVERS}','-Xmx1200m']
     proc=subprocess.Popen(args,env=env,stdout=log,stderr=subprocess.STDOUT)
     LIVE_PROC,LIVE_LOG=proc,log
-    deadline=time.monotonic()+60
+    wait_native_window(proc)
+    cmd('scrot',str(ART/'startup-before-accessibility.png'))
+    deadline=time.monotonic()+40
     while time.monotonic()<deadline:
-        assert proc.poll() is None,'Native app exited during startup'
+        assert_native_alive(proc)
         if matching('Configure DBeaver',['label']) if first else matching('Connections',['page tab']):break
         time.sleep(.5)
     else:raise AssertionError('Native startup timed out')
-    snapshot('startup')
+    snapshot('startup');assert_native_alive(proc)
     if first:configure()
     one('Connections',['page tab'],seconds=40)
     windows=cmd('xdotool','search','--onlyvisible','--name','^DBeaver').splitlines();assert windows
@@ -293,10 +354,18 @@ try:
     (BASE_ART/'gui-observations.json').write_text(json.dumps({'observations':observations,'databaseRowsUnchanged':True,'sourceFixtureAuthorExit':author_exit},indent=2)+'\n')
     cmd('/usr/bin/python3',str(PROJECT/'scripts/verify-layout.py'),'final')
 except Exception:
-    (ART/'failure.txt').write_text(traceback.format_exc());snapshot('failure');raise
+    (ART/'failure.txt').write_text(traceback.format_exc())
+    capture_crash_stacks()
+    try:
+        if LIVE_PROC is not None:assert_native_alive(LIVE_PROC)
+        snapshot('failure')
+    except Exception:
+        cmd('scrot',str(ART/'failure.png'))
+    raise
 finally:
     if LIVE_PROC is not None and LIVE_PROC.poll() is None:
         LIVE_PROC.terminate()
         try:LIVE_PROC.wait(timeout=20)
         except subprocess.TimeoutExpired:LIVE_PROC.kill();LIVE_PROC.wait(timeout=10)
     if LIVE_LOG is not None:LIVE_LOG.close()
+    if (ART/'failure.txt').exists():capture_crash_stacks()

@@ -86,6 +86,11 @@ Changes invalidate prior confirmation and receipts; delayed imports and hash
 jobs cannot restore an older selection. The clean offline-tool download omits
 imported files and names. Printing includes the selected identities and columns.
 
+The native harness now waits for a bounded stable X11 window before startup
+accessibility traversal, following the recorded GTK failures. This is a timing
+experiment, not an established native crash fix; fatal errors still fail and
+only safe current-thread diagnostic frames are retained.
+
 The browser workflow checks sandboxed Chrome, JA/EN desktop and 320/390px layouts,
 keyboard actions, blocked input and asynchronous races, print output and an
 offline reopen. Its actual XML download is passed byte-for-byte into the official
