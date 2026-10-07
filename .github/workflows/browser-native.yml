@@ -1,0 +1,75 @@
+name: Actual offline browser copy in official DBeaver
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Standard local fonts and PDF inspection
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk poppler-utils
+          npm ci --ignore-scripts
+      - name: Bounded core tests and reproducible standalone build
+        run: |
+          npm run verify
+          python3 scripts/verify-layout.py selftest
+          git diff --exit-code -- dist/grid-pass.html
+      - name: Actual sandboxed offline browser downloads and review flows
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: npm run test:browser
+      - name: Retain actual downloads and visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gridpass-browser-downloads
+          path: |
+            artifacts/browser/
+            dist/grid-pass.html
+          if-no-files-found: error
+  native:
+    needs: browser
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GRIDPASS_BROWSER_INPUT: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: gridpass-browser-downloads
+          path: downloaded-browser
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Standard hosted GUI tools and pinned JS dependency
+        run: |
+          npm ci --ignore-scripts
+          sudo apt-get update
+          sudo apt-get install -y python3-pyatspi python3-pil xdotool xclip scrot xvfb openbox dbus-x11 default-jdk-headless libgtk-3-0t64 libwebkit2gtk-4.1-0
+      - name: Verify exact official native consumer and JDBC bytes
+        run: |
+          python3 scripts/fetch-consumer.py
+          /tmp/gridpass-native-gate/official/dbeaver/jre/bin/java -version 2> artifacts/native/java-version.txt
+          javac -version > artifacts/native/compiler-version.txt 2>&1
+          javac --release 17 -d /tmp/gridpass-pin-classes scripts/CanonicalPins.java
+          /tmp/gridpass-native-gate/official/dbeaver/jre/bin/java -cp /tmp/gridpass-pin-classes CanonicalPins > artifacts/native/canonical-pins.json
+          python3 scripts/verify-pins.py
+      - name: Re-author original fixtures and consume actual browser copy with every native control
+        run: xvfb-run -a -s '-screen 0 1600x1000x24' dbus-run-session -- sh -c 'openbox > /tmp/gridpass-openbox.log 2>&1 & /usr/bin/python3 scripts/gui-gate.py'
+      - name: Preserve original browser/native evidence without vendor payloads
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gridpass-browser-native-proof
+          path: |
+            artifacts/native/
+            downloaded-browser/
+          if-no-files-found: error
