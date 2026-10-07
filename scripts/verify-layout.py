@@ -33,6 +33,20 @@ def signature(n,remove_layout=False):
     attrs=sorted((k,v) for k,v in n.attrib.items() if not(remove_layout and n.tag=='constraint' and k in ['pos','visible','order','orderDesc']))
     content=n.text if n.tag in ['option','value'] else (n.text or '').strip()
     return (n.tag,attrs,content,[s for c in n if (s:=signature(c,remove_layout)) is not None])
+def native_other_preserved(before,after):
+    # Observed in every R1 native save: unopened entries are RestoredAttribute
+    # objects and ConfigSaver omits only their explicit false pseudo flag.
+    # This is deliberately separate from the unchanged product-byte oracle.
+    expected=ET.fromstring(ET.tostring(before))
+    b=expected.findall('flatten-attribute-bindings/attribute')
+    a=after.findall('flatten-attribute-bindings/attribute')
+    assert len(a)==len(b)==4
+    assert [n.get('name') for n in b]==[n.get('name') for n in a]==NAMES
+    for old,new in zip(b,a):
+        assert old.get('isPseudoAttribute')=='false' and 'isPseudoAttribute' not in new.attrib,'Unexpected native pseudo-attribute transition'
+        del old.attrib['isPseudoAttribute']
+    assert signature(expected)==signature(after),'Native save changed another entry beyond the observed false-flag omission'
+    return [{'bindingName':n.get('name'),'attribute':'isPseudoAttribute','before':'false','after':None} for n in b]
 def chunks(raw):
     result={}
     for m in re.finditer(rb'<filter\b[^>]*>[\s\S]*?</filter>',raw):
@@ -100,7 +114,14 @@ if sys.argv[1]=='selftest':
         try:own_nonlayout_raw(before,fault)
         except AssertionError:pass
         else:raise AssertionError('Protected-byte fault was hidden by the mask')
-    print('PASS entire-target mask and five protected-byte fault controls');sys.exit(0)
+    native_before=ET.fromstring('<filter objectId="other"><flatten-attribute-bindings>'+''.join('<attribute name="'+n+'" typeName="TEXT" isPseudoAttribute="false"/>' for n in NAMES)+'</flatten-attribute-bindings><constraint name="id" pos="0"><value>opaque sentinel</value></constraint></filter>')
+    native_after=ET.fromstring(ET.tostring(native_before).replace(b' isPseudoAttribute="false"',b''))
+    native_other_preserved(native_before,native_after)
+    for raw in [ET.tostring(native_after).replace(b'typeName="TEXT"',b'typeName="INTEGER"',1),ET.tostring(native_after).replace(b'name="id" typeName',b'name="id" isPseudoAttribute="true" typeName',1),ET.tostring(native_after).replace(b'pos="0"',b'pos="1"'),ET.tostring(native_after).replace(b'opaque sentinel',b'changed sentinel')]:
+        try:native_other_preserved(native_before,ET.fromstring(raw))
+        except AssertionError:pass
+        else:raise AssertionError('Unexpected native metadata/layout change was ignored')
+    print('PASS target-byte mask and narrow native normalization: nine fault controls');sys.exit(0)
 
 original=(ART/'original-saved-data-filter.xml').read_bytes();base=filters(original);original_parts=chunks(original)
 assert layout(base['source_table'])==LAYOUT,'Native-authored source layout differs from literal contract'
@@ -176,9 +197,12 @@ for o in obs['observations']:
     saved=filters((ART/f'{mode}-native-saved.xml').read_bytes())
     assert layout(saved['target_table'])==expected_layouts['positive' if mode=='positive-reloaded' else mode]
     assert signature(saved['target_table'],True)==signature(base['target_table'],True),'Native save changed nonlayout target semantics'
-    for other in ['source_table','unrelated_table']:assert signature(saved[other])==signature(base[other]),'Native save changed another entry'
+    normalizations=[]
+    for other in ['source_table','unrelated_table']:
+        normalizations.extend({'entry':other,**item} for item in native_other_preserved(base[other],saved[other]))
+    assert len(normalizations)==8
     negative=mode.startswith('negative-')
     if negative:assert rows!=EXPECT['positive'][0],'Positive grid oracle accepted negative control'
-    checks.append({'mode':mode,'literalNativeGridAndDialogOrder':'PASS','nativeSaveAndExit':'PASS','positiveGridOracleRejected':negative})
-(ART/'native-layout-report.json').write_text(json.dumps({'status':'PASS','scope':'Actual unchanged official DBeaver GUI and saved-data-filter loader; original synthetic fixtures only','checks':checks,'sourceFixtureSHA256':sha(original),'patchedSHA256':sha(positive),'targetNonlayoutPreserved':True,'otherEntriesPreserved':True,'fourExactFaultsObserved':True,'nativePinCheckboxScreenshotsRequireIndependentReview':True,'normalizationBoundary':'Product output preserves protected bytes. Subsequent native save is checked for the same protected semantics, not whole-file byte identity.'},indent=2)+'\n')
+    checks.append({'mode':mode,'literalNativeGridAndDialogOrder':'PASS','nativeSaveAndExit':'PASS','positiveGridOracleRejected':negative,'observedNativeNormalizations':normalizations})
+(ART/'native-layout-report.json').write_text(json.dumps({'status':'PASS','scope':'Actual unchanged official DBeaver GUI and saved-data-filter loader; original synthetic fixtures only','checks':checks,'sourceFixtureSHA256':sha(original),'patchedSHA256':sha(positive),'targetNonlayoutPreserved':True,'otherEntriesPreservedExceptObservedNativeFalseFlagOmission':True,'fourExactFaultsObserved':True,'nativePinCheckboxScreenshotsRequireIndependentReview':True,'normalizationBoundary':'Product output preserves every protected byte. Native save preserves target nonlayout semantics; on unopened source/unrelated bindings it must omit exactly isPseudoAttribute=false, with all other semantics unchanged. Native saves are not whole-file byte-preserving.'},indent=2)+'\n')
 print('PASS actual native target grids, save/fresh reopen, preserved predicates/bindings and four exact controls')

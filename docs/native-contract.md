@@ -54,6 +54,11 @@ change the actual grid to id,name,status while its visual-position dialog stays
 id,status,name,note. The position fault changes both. Original predicate/value
 bytes and other entries remain unchanged in every variant. After native save,
 protected semantics are checked separately from product byte preservation.
+The first full run observed one native-only normalization: all four bindings in
+each unopened source/unrelated entry omit `isPseudoAttribute="false"`. The
+independent oracle requires precisely that transition and rejects any other
+semantic change. The target comparison stays exact, and the product patch must
+preserve those false flags and every other protected byte.
 
 ## Product limits
 

@@ -49,7 +49,7 @@ endpoint for arbitrary user files. See [the full contract](docs/native-contract.
 
 Run `npm ci --ignore-scripts` and `npm test` for 74 core checks. Run
 `python3 scripts/verify-layout.py selftest` for the independent protected-byte
-oracle's five fault controls. Inputs require
+oracle's nine fault controls. Inputs require
 XML 1.0/UTF-8, at most 4 MiB per file, bounded XML depth/elements, and at most 256
 ordinary flat columns in a selected entry. Names must exactly equal referenced
 native binding names; quoted-name distinctions are currently unsupported.
@@ -63,7 +63,10 @@ identities and noncanonical pin strings fail closed. This is not database schema
 validation or a whole-file safety check.
 
 The product patch preserves protected bytes; subsequent native saves are checked
-for protected semantics, not whole-file byte identity. Original code and
+for protected semantics, not whole-file byte identity. In the observed native
+save, unopened source/unrelated bindings lose their explicit
+`isPseudoAttribute="false"` field; the gate permits only that exact omission.
+Original code and
 synthetic fixture content have no reuse license grant. Existing third-party
 ownership notices apply only to their dependencies:
 [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).

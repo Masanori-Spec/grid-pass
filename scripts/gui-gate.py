@@ -20,7 +20,11 @@ with sqlite3.connect(DB) as db:
         name_type='VARCHAR(40)' if table=='target_table' else 'TEXT'
         db.execute(f'CREATE TABLE {table} (id INTEGER PRIMARY KEY, name {name_type}, status TEXT, note TEXT)')
         db.executemany(f'INSERT INTO {table} (id,name,status,note) VALUES (?,?,?,?)',DATA)
-def cmd(*args):return subprocess.run(args,check=True,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=15).stdout
+def cmd(*args):
+    try:return subprocess.run(args,check=True,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=15).stdout
+    except subprocess.CalledProcessError as error:
+        (ART/'command-failure.json').write_text(json.dumps({'args':args,'exit':error.returncode,'stdout':(error.stdout or '')[-131072:],'stderr':(error.stderr or '')[-131072:]},indent=2)+'\n')
+        raise
 def walk(node,budget,depth=0):
     if depth>30 or budget[0]<=0:return
     budget[0]-=1
