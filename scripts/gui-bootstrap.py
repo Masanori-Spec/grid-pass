@@ -144,13 +144,22 @@ def normal_exit(proc):
     cmd('xdotool','key','--clearmodifiers','Alt+F4')
     deadline=time.monotonic()+30;answered=False
     while proc.poll() is None and time.monotonic()<deadline:
-        titles=[n.name.strip() for n,_ in nodes() if n.getRoleName() in ['dialog','frame']]
+        titles=[]
+        for n,_ in nodes():
+            try:
+                if n.getRoleName() in ['dialog','frame']:titles.append(n.name.strip())
+            except Exception:
+                # Native accessibles can retire before the process is reaped.
+                # Their disappearance is never a substitute for exit status0.
+                continue
         if 'Exit DBeaver' in titles and not answered:
             dialog=modal_frame('Exit DBeaver')
             snapshot('09-native-exit-confirmation')
             click(one('Yes',['push button'],scope=dialog));answered=True
+            break
         time.sleep(.3)
-    assert proc.poll()==0,f'Normal native exit did not succeed: {proc.poll()}'
+    code=proc.wait(timeout=max(.1,deadline-time.monotonic()))
+    assert code==0,f'Normal native exit did not succeed: {code}'
     return answered
 
 log=open(ART/'dbeaver.log','w')
