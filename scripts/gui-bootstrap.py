@@ -58,20 +58,28 @@ def unique_screen(items):
         key=(n.getRoleName(),n.name,n.description,tuple(r))
         if key not in seen:seen.add(key);result.append(n)
     return result
-def matching(name,role=None):
+def matching(name,role=None,scope=None):
     found=[]
-    for n,_ in nodes():
+    for n,_ in (walk(scope,[12000]) if scope is not None else nodes()):
         try:
             if n.name==name and (role is None or n.getRoleName() in role) and n.getState().contains(pyatspi.STATE_SHOWING):found.append(n)
         except Exception:pass
     return unique_screen(found)
-def one(name,roles=None,seconds=20):
+def one(name,roles=None,seconds=20,scope=None):
     deadline=time.monotonic()+seconds
     while time.monotonic()<deadline:
-        found=matching(name,roles)
+        found=matching(name,roles,scope)
         if len(found)==1:return found[0]
         time.sleep(.25)
     raise AssertionError(f'Expected one visible native control: {name!r}; got {len(found)}')
+def modal_frame(title):
+    found=[]
+    for n,_ in nodes():
+        try:
+            if n.getRoleName() in ['frame','dialog'] and n.name.strip()==title and n.getState().contains(pyatspi.STATE_SHOWING) and n.getState().contains(pyatspi.STATE_MODAL):found.append(n)
+        except Exception:pass
+    found=unique_screen(found);assert len(found)==1,f'Expected one actual modal frame: {title}'
+    return found[0]
 def configure():
     assert matching('Configure DBeaver',['label']),'Expected the observed initial native wizard'
     opted_out=False
@@ -128,18 +136,22 @@ def open_table():
     assert rows==['1\tAlba\tB\tnote1','2\tBasil\tA\tnote2','3\tCedar\tB\tnote3','4\tDahlia\tC\tnote4','5\tElm\tA\tnote5'],'Actual grid differs from literal original SQLite rows'
     snapshot('06-copied-native-grid');cmd('xdotool','key','Escape');cmd('xdotool','key','F11');time.sleep(.5)
     snapshot('07-filter-menu');click(one('Customize filters ...',['menu item']));time.sleep(.5)
-    snapshot('08-native-filter-settings');click(one('Cancel',['push button']))
+    snapshot('08-native-filter-settings')
+    dialog=modal_frame('Result Set Order/Filter Settings')
+    click(one('Cancel',['push button'],scope=dialog))
     return rows
 def normal_exit(proc):
     cmd('xdotool','key','--clearmodifiers','Alt+F4')
-    deadline=time.monotonic()+30
+    deadline=time.monotonic()+30;answered=False
     while proc.poll() is None and time.monotonic()<deadline:
         titles=[n.name.strip() for n,_ in nodes() if n.getRoleName() in ['dialog','frame']]
-        if any(t in ['Exit DBeaver','Confirm Exit','Confirm exit'] for t in titles):
-            yes=matching('Yes',['push button'])
-            if len(yes)==1:click(yes[0])
+        if 'Exit DBeaver' in titles and not answered:
+            dialog=modal_frame('Exit DBeaver')
+            snapshot('09-native-exit-confirmation')
+            click(one('Yes',['push button'],scope=dialog));answered=True
         time.sleep(.3)
     assert proc.poll()==0,f'Normal native exit did not succeed: {proc.poll()}'
+    return answered
 
 log=open(ART/'dbeaver.log','w')
 args=[str(BIN),'-newInstance','-nosplash','-nl','en_US','-data',str(WORK),'-con',f'driver=sqlite:sqlite_jdbc|database={DB}|name=GridPass Fixture|save=true|connect=true','-vmargs',f'-Duser.home={HOME_DIR}',f'-Ddbeaver.drivers.configuration-file={DRIVERS}','-Xmx1200m']
@@ -160,10 +172,10 @@ try:
     configure();time.sleep(2);snapshot('04-main-window');rows=open_table()
     profile_jars=[str(p) for base in [WORK,HOME_DIR,ROOT/'xdg-data',ROOT/'xdg-config',ROOT/'xdg-cache'] for p in base.rglob('*.jar')]
     assert not profile_jars,'Unexpected driver download into the disposable profile'
-    normal_exit(proc);log.flush()
+    exit_confirmed=normal_exit(proc);log.flush()
     assert 'A fatal error has been detected' not in (ART/'dbeaver.log').read_text(),'Native runtime reported a fatal error'
     (ART/'provided-drivers.xml').write_bytes(DRIVERS.read_bytes())
-    report={'status':'CONNECTED_TABLE_OBSERVED','fullNativeLayoutGate':'PENDING','normalExit':proc.returncode,'disposableWorkspace':str(WORK),'disposableJavaUserHome':str(HOME_DIR),'syntheticTables':['source_table','target_table','unrelated_table'],'localDriverJar':JAR.name,'profileDownloadedJars':profile_jars,'literalNativeGridRows':rows,'note':'Native local-driver/table/filter-dialog compatibility only; no layout transfer or product UI acceptance'}
+    report={'status':'CONNECTED_TABLE_OBSERVED','fullNativeLayoutGate':'PENDING','normalExit':proc.returncode,'nativeExitConfirmation':exit_confirmed,'disposableWorkspace':str(WORK),'disposableJavaUserHome':str(HOME_DIR),'syntheticTables':['source_table','target_table','unrelated_table'],'localDriverJar':JAR.name,'profileDownloadedJars':profile_jars,'literalNativeGridRows':rows,'note':'Native local-driver/table/filter-dialog compatibility only; no layout transfer or product UI acceptance'}
     (ART/'bootstrap-report.json').write_text(json.dumps(report,indent=2)+'\n')
 except Exception:
     (ART/'failure.txt').write_text(traceback.format_exc());snapshot('failure');raise
