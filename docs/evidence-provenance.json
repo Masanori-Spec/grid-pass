@@ -1,0 +1,249 @@
+{
+  "product": "GridPass",
+  "testedCommit": "804bbe986a49c19fa26fecfd4222b1351f1ccaac",
+  "browserNativeRun": 37577834267,
+  "nativeOnlyRun": 37577834260,
+  "browserArtifact": {
+    "id": 11463725750,
+    "sha256": "0df3166840fe342fb627842ba76378be035ff29510aafdf6f925d11ab83535e4",
+    "members": 25
+  },
+  "browserNativeArtifact": {
+    "id": 11464256069,
+    "sha256": "4b374035e1d9e4c0e73e1fe5cc8325493086341b58bfe7d6f5214ebfb3982109",
+    "members": 179
+  },
+  "nativeOnlyArtifact": {
+    "id": 11464001313,
+    "sha256": "883e658e7b40e024f61047cbb19b3ec7ac85a6ae756b3ada50484a3573489794",
+    "members": 153
+  },
+  "testedHTMLSHA256": "aa8709a6772f5db5031a439771332d1acc0d6f0e5d8bddbeea388c86915c6ca5",
+  "scope": "Exact copies of original successful hosted evidence; no generated labels or replacement native outputs. Prior GTK failures remain documented in native-checkpoint.md.",
+  "files": [
+    {
+      "path": "docs/evidence/browser/browser-report.json",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/browser-report.json",
+      "bytes": 7121,
+      "sha256": "909bb21eff6039c4fa6be9397e61e5cb1d02a7cc09b43449c9a1f64d06da2a4a"
+    },
+    {
+      "path": "docs/evidence/browser/exported-layout.xml",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/exported-layout.xml",
+      "bytes": 4408,
+      "sha256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639"
+    },
+    {
+      "path": "docs/evidence/browser/layout-receipt.json",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/layout-receipt.json",
+      "bytes": 3180,
+      "sha256": "709e1dc26e4d43b1ff6fb4781b8832115a61bca1e9df083aa3aaf058546f1921"
+    },
+    {
+      "path": "docs/evidence/browser/01-en-desktop.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/01-en-desktop.png",
+      "bytes": 216642,
+      "sha256": "792e4c1dd13b48e2c70fae6d8e67cff1ac001db8d32cdbc654e0a3d561cc2bb5"
+    },
+    {
+      "path": "docs/evidence/browser/01-ja-desktop.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/01-ja-desktop.png",
+      "bytes": 255283,
+      "sha256": "8e59e4c6f2ff27184a547c7e0d74cbcdd1e55c507cde6babea70aad6c860ebbc"
+    },
+    {
+      "path": "docs/evidence/browser/03-ja-320-left.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/03-ja-320-left.png",
+      "bytes": 222380,
+      "sha256": "51bb63668e1fe21619b577ed96de92597b830f6534a74e78275d3a79d91ff0ef"
+    },
+    {
+      "path": "docs/evidence/browser/03-en-320-right.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/03-en-320-right.png",
+      "bytes": 47419,
+      "sha256": "d82e26800e86251838c312fc40ae6ca5934c29989581f531c7c1be55426b3ab2"
+    },
+    {
+      "path": "docs/evidence/browser/02-ja-review.pdf",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/02-ja-review.pdf",
+      "bytes": 225811,
+      "sha256": "c24c5ec24211aa68071ac0f4e763d0e55a00812b2e23d9101c98704e4c726d4e"
+    },
+    {
+      "path": "docs/evidence/browser/02-en-review.pdf",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/02-en-review.pdf",
+      "bytes": 55081,
+      "sha256": "a165eed9b7e2671475d54339721431892f05a25cc22aff0e4cb4c6e70b7d1d76"
+    },
+    {
+      "path": "docs/evidence/browser/02-ja-review.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/02-ja-review.png",
+      "bytes": 99188,
+      "sha256": "c0d0c171f1a7400eb5a839a40140fb863112bc2d1f18a02c21f38e9b454ea8f1"
+    },
+    {
+      "path": "docs/evidence/browser/02-en-review.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/02-en-review.png",
+      "bytes": 83725,
+      "sha256": "2eb55412cbcfe62ac580ab81cf24cfaf9cc87b3e0c9a80ccbc7c755830e12145"
+    },
+    {
+      "path": "docs/evidence/browser/04-en-error.png",
+      "artifactId": 11463725750,
+      "artifactMember": "artifacts/browser/04-en-error.png",
+      "bytes": 174331,
+      "sha256": "f10895ef0162473581bd0a7776769f6a542c7f3c3c279c39761d8789b295119f"
+    },
+    {
+      "path": "docs/evidence/native/native-layout-report.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/native-layout-report.json",
+      "bytes": 11149,
+      "sha256": "1a1baae30a5570ee7e2bc602a35423b5967c6b78a2f21b52309fbdd482380bfa"
+    },
+    {
+      "path": "docs/evidence/native/gui-observations.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/gui-observations.json",
+      "bytes": 7402,
+      "sha256": "cc70c9fc101ad622876dc85fc97d4e1498558fe86a7b00ecbfde6ac0130bceb0"
+    },
+    {
+      "path": "docs/evidence/native/layout-input-report.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/layout-input-report.json",
+      "bytes": 840,
+      "sha256": "3df15b47a25937ff90bee41fa83e23a9b66ac9924517c56df445993befee871f"
+    },
+    {
+      "path": "docs/evidence/native/browser-input-provenance.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/browser-input-provenance.json",
+      "bytes": 599,
+      "sha256": "eb970052728305241d5f965c6ee6ef694c9f39eb28d37bc6c1651b41895e0f76"
+    },
+    {
+      "path": "docs/evidence/native/consumer-pin.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/consumer-pin.json",
+      "bytes": 787,
+      "sha256": "4c993fdf94e7cafcfa5e48408129e46afccedb0d3dcaa60a3b260066f6fe3401"
+    },
+    {
+      "path": "docs/evidence/native/canonical-pins-report.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/canonical-pins-report.json",
+      "bytes": 275,
+      "sha256": "2a2d2fa2f78e4eb788a2f1ac427859eeb48d1807de7dbc2b18ef6d01c2dc0a7c"
+    },
+    {
+      "path": "docs/evidence/native/java-version.txt",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/java-version.txt",
+      "bytes": 191,
+      "sha256": "3fc51be00d0c37da2221595b2fa4207abf9cd72d87f51af2579adfc358a52659"
+    },
+    {
+      "path": "docs/evidence/native/positive/actual-target-grid.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/positive/actual-target-grid.png",
+      "bytes": 106850,
+      "sha256": "855614a46bc1ca6a3bc29bc7fea04a72179c00bd39d58eb2414dfd94ce153f91"
+    },
+    {
+      "path": "docs/evidence/native/positive-reloaded/actual-target-settings.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/positive-reloaded/actual-target-settings.png",
+      "bytes": 116874,
+      "sha256": "cc1230c34b41890da1cc200ff5c2688f88f80dfc1b67b3b64e3b07660b680305"
+    },
+    {
+      "path": "docs/evidence/native/negative-pin/actual-target-settings.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-pin/actual-target-settings.png",
+      "bytes": 116817,
+      "sha256": "cecd2c05695b2e446251b13d99344d348b80f61f51c451ab6bd1ebf6be269f72"
+    },
+    {
+      "path": "docs/evidence/native/negative-visibility/actual-target-grid.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-visibility/actual-target-grid.png",
+      "bytes": 109591,
+      "sha256": "311046198dc081201c873e0cb944c057c2c294c1af8907008146572be1319286"
+    },
+    {
+      "path": "docs/evidence/native/negative-position/actual-target-grid.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-position/actual-target-grid.png",
+      "bytes": 106896,
+      "sha256": "b43a035ddae60fb41c0bdb531736dc57ae2906a739f631bf496316b225c7ef6a"
+    },
+    {
+      "path": "docs/evidence/native/negative-sort/actual-target-grid.png",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-sort/actual-target-grid.png",
+      "bytes": 106885,
+      "sha256": "a1b5f52fb9de7849b57923e35110e59c1670c57fc7f632b9cc1d27dff72cf350"
+    },
+    {
+      "path": "docs/evidence/native/author/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/author/startup-readiness.json",
+      "bytes": 456,
+      "sha256": "ebe26f8fd06c3f384c0ce4aef23422c5f704f25639618597d02b59a9ba6f68bc"
+    },
+    {
+      "path": "docs/evidence/native/positive/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/positive/startup-readiness.json",
+      "bytes": 481,
+      "sha256": "5ac51327c9731eb665958b503fd4c6573d717b2d60ef4c7da4f69eb3245a512f"
+    },
+    {
+      "path": "docs/evidence/native/positive-reloaded/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/positive-reloaded/startup-readiness.json",
+      "bytes": 478,
+      "sha256": "99b432b269a8399cdd6376f771cef994c32c804a291245cc19107fad0f1729a3"
+    },
+    {
+      "path": "docs/evidence/native/negative-visibility/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-visibility/startup-readiness.json",
+      "bytes": 478,
+      "sha256": "ef732fc6b367b470aad13f2d2faaa770d9fa6c14d4d060aab0b8795495782403"
+    },
+    {
+      "path": "docs/evidence/native/negative-position/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-position/startup-readiness.json",
+      "bytes": 478,
+      "sha256": "5dc25db5fda3cb7efe2bf89546deccb009b59dd79adb4dd24ca1416e8ba46dde"
+    },
+    {
+      "path": "docs/evidence/native/negative-pin/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-pin/startup-readiness.json",
+      "bytes": 478,
+      "sha256": "6e76f871868671a3df4ae46c3a91e29da3ce10b80e85511455d628ea30e65ff0"
+    },
+    {
+      "path": "docs/evidence/native/negative-sort/startup-readiness.json",
+      "artifactId": 11464256069,
+      "artifactMember": "artifacts/native/negative-sort/startup-readiness.json",
+      "bytes": 478,
+      "sha256": "3643f478955f68a31614129584cb778ffbaa50410a68068414eb192ebbf7906d"
+    }
+  ]
+}

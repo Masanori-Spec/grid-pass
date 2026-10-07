@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "inputSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "positiveSHA256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639",
+  "targetNonlayoutSubtreesUnchanged": true,
+  "allTargetBytesOutsideLayoutFieldsUnchanged": true,
+  "nameBindingTypes": {
+    "source": "TEXT",
+    "target": "VARCHAR"
+  },
+  "allOutsideTargetBytesUnchanged": true,
+  "sourcePredicateNotTransferred": true,
+  "faultHashes": {
+    "negative-visibility": "6f89edf852d9e6950db15cbe004bd6d7d181241402d9cb066a2b2fa04355c48e",
+    "negative-position": "48129118c44d71e24efbb19aa33529b54d9ae1cd1820ca44a65ba3650b50d583",
+    "negative-pin": "23825ef11debff325c68dfd8efe82d6c0efb517725d7919ee679d20ae45b7f11",
+    "negative-sort": "c7263e42e84765020074ce3e4a03412ba027699de0ea2bf85be359f70bd25dfe"
+  }
+}

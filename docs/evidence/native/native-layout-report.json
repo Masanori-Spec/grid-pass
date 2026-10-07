@@ -1,0 +1,397 @@
+{
+  "status": "PASS",
+  "scope": "Actual unchanged official DBeaver GUI and saved-data-filter loader; original synthetic fixtures only",
+  "checks": [
+    {
+      "mode": "positive",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": false,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    },
+    {
+      "mode": "positive-reloaded",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": false,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    },
+    {
+      "mode": "negative-visibility",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": true,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    },
+    {
+      "mode": "negative-position",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": true,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    },
+    {
+      "mode": "negative-pin",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": true,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    },
+    {
+      "mode": "negative-sort",
+      "literalNativeGridAndDialogOrder": "PASS",
+      "nativeSaveAndExit": "PASS",
+      "positiveGridOracleRejected": true,
+      "observedNativeNormalizations": [
+        {
+          "entry": "source_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "source_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "id",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "name",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "status",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        },
+        {
+          "entry": "unrelated_table",
+          "bindingName": "note",
+          "attribute": "isPseudoAttribute",
+          "before": "false",
+          "after": null
+        }
+      ]
+    }
+  ],
+  "sourceFixtureSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "patchedSHA256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639",
+  "targetNonlayoutPreserved": true,
+  "otherEntriesPreservedExceptObservedNativeFalseFlagOmission": true,
+  "fourExactFaultsObserved": true,
+  "nativePinCheckboxScreenshotsRequireIndependentReview": true,
+  "normalizationBoundary": "Product output preserves every protected byte. Native save preserves target nonlayout semantics; on unopened source/unrelated bindings it must omit exactly isPseudoAttribute=false, with all other semantics unchanged. Native saves are not whole-file byte-preserving."
+}

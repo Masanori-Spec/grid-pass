@@ -1,0 +1,207 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "Clean Japanese start with no selected entries or enabled export",
+      "passed": true
+    },
+    {
+      "name": "A keyboard chooser activation imports the file and clears the native input for reselection",
+      "passed": true
+    },
+    {
+      "name": "Import requires explicit source and existing target entry choices",
+      "passed": true
+    },
+    {
+      "name": "Exact original and transferred native layout order, pin and hidden column are reviewed",
+      "passed": true
+    },
+    {
+      "name": "Actual keyboard XML download equals independent literal byte patch and complete receipt",
+      "passed": true
+    },
+    {
+      "name": "Repeated export and receipt are byte-identical",
+      "passed": true
+    },
+    {
+      "name": "Reselecting the same file through the chooser invalidates selection, approval and receipt",
+      "passed": true
+    },
+    {
+      "name": "ja one-page print contains exact selected source/target identities and all columns",
+      "passed": true
+    },
+    {
+      "name": "Japanese 390px headings preserve complete lines",
+      "passed": true,
+      "headline": 2,
+      "scope": 1
+    },
+    {
+      "name": "ja 390px review has no page overflow and its final table column is reachable",
+      "passed": true,
+      "left": 36,
+      "right": 354,
+      "cellLeft": 259.25,
+      "cellRight": 353,
+      "headerLeft": 259.25,
+      "headerRight": 353,
+      "header": "変更",
+      "scroll": 444
+    },
+    {
+      "name": "Japanese 320px headings preserve complete lines",
+      "passed": true,
+      "headline": 2,
+      "scope": 1
+    },
+    {
+      "name": "ja 320px review has no page overflow and its final table column is reachable",
+      "passed": true,
+      "left": 36,
+      "right": 284,
+      "cellLeft": 189.25,
+      "cellRight": 283,
+      "headerLeft": 189.25,
+      "headerRight": 283,
+      "header": "変更",
+      "scroll": 514
+    },
+    {
+      "name": "en one-page print contains exact selected source/target identities and all columns",
+      "passed": true
+    },
+    {
+      "name": "en 390px review has no page overflow and its final table column is reachable",
+      "passed": true,
+      "left": 36,
+      "right": 354,
+      "cellLeft": 269.390625,
+      "cellRight": 353,
+      "headerLeft": 269.390625,
+      "headerRight": 353,
+      "header": "Change",
+      "scroll": 444
+    },
+    {
+      "name": "en 320px review has no page overflow and its final table column is reachable",
+      "passed": true,
+      "left": 36,
+      "right": 284,
+      "cellLeft": 199.390625,
+      "cellRight": 283,
+      "headerLeft": 199.390625,
+      "headerRight": 283,
+      "header": "Change",
+      "scroll": 514
+    },
+    {
+      "name": "Changing the target invalidates prior confirmation and receipt",
+      "passed": true
+    },
+    {
+      "name": "Selecting the same existing layout produces an exact byte-preserving no-op",
+      "passed": true
+    },
+    {
+      "name": "Dispatched empty target-file change clears stale review and export",
+      "passed": true
+    },
+    {
+      "name": "DTD blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "invalid UTF8 blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "duplicate object blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "noncanonical pin blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "binding mismatch blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "nested binding blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "ambiguous position blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "oversized blocks output and stale review",
+      "passed": true
+    },
+    {
+      "name": "Exact cross-file column mismatch blocks instead of guessing names",
+      "passed": true
+    },
+    {
+      "name": "Decoded user labels are rendered only as text",
+      "passed": true
+    },
+    {
+      "name": "Reset cancels an in-flight file read before it can restore state",
+      "passed": true
+    },
+    {
+      "name": "A later source file wins over an older delayed import",
+      "passed": true
+    },
+    {
+      "name": "Changing target during hashing cancels the stale download and receipt",
+      "passed": true
+    },
+    {
+      "name": "Offline tool copy excludes imported labels, opaque content and filenames, then reopens cleanly",
+      "passed": true
+    },
+    {
+      "name": "Keyboard clear removes both imported entries, approval and receipt",
+      "passed": true
+    },
+    {
+      "name": "Main and offline pages remain sandboxed with zero script/console errors or network requests",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "networkRequests": [],
+  "screenshots": [
+    "01-ja-desktop.png",
+    "02-ja-review.png",
+    "03-ja-390-left.png",
+    "03-ja-390-right.png",
+    "03-ja-320-left.png",
+    "03-ja-320-right.png",
+    "01-en-desktop.png",
+    "02-en-review.png",
+    "03-en-390-left.png",
+    "03-en-390-right.png",
+    "03-en-320-left.png",
+    "03-en-320-right.png",
+    "04-en-error.png"
+  ],
+  "shippedHTMLSHA256": "aa8709a6772f5db5031a439771332d1acc0d6f0e5d8bddbeea388c86915c6ca5",
+  "downloads": {
+    "primary": {
+      "sha256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639",
+      "bytes": 4408,
+      "receiptSHA256": "709e1dc26e4d43b1ff6fb4781b8832115a61bca1e9df083aa3aaf058546f1921"
+    }
+  },
+  "browserVersion": "154.0.8037.57",
+  "chromiumMainProcessCommands": [
+    "/usr/bin/google-chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=/tmp/playwright_chromiumdev_profile-eULdwa --remote-debugging-pipe --no-startup-window"
+  ]
+}

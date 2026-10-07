@@ -1,0 +1,458 @@
+{
+  "observations": [
+    {
+      "rows": [
+        [
+          "5",
+          "A",
+          "Elm"
+        ],
+        [
+          "2",
+          "A",
+          "Basil"
+        ],
+        [
+          "3",
+          "B",
+          "Cedar"
+        ],
+        [
+          "1",
+          "B",
+          "Alba"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "status",
+        "name"
+      ],
+      "rawFile": "positive/actual-target-grid.tsv",
+      "mode": "positive",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    },
+    {
+      "rows": [
+        [
+          "5",
+          "A",
+          "Elm"
+        ],
+        [
+          "2",
+          "A",
+          "Basil"
+        ],
+        [
+          "3",
+          "B",
+          "Cedar"
+        ],
+        [
+          "1",
+          "B",
+          "Alba"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "status",
+        "name"
+      ],
+      "rawFile": "positive-reloaded/actual-target-grid.tsv",
+      "mode": "positive-reloaded",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    },
+    {
+      "rows": [
+        [
+          "5",
+          "A",
+          "Elm",
+          "note5"
+        ],
+        [
+          "2",
+          "A",
+          "Basil",
+          "note2"
+        ],
+        [
+          "3",
+          "B",
+          "Cedar",
+          "note3"
+        ],
+        [
+          "1",
+          "B",
+          "Alba",
+          "note1"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "status",
+        "name",
+        "note"
+      ],
+      "rawFile": "negative-visibility/actual-target-grid.tsv",
+      "mode": "negative-visibility",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    },
+    {
+      "rows": [
+        [
+          "5",
+          "Elm",
+          "A"
+        ],
+        [
+          "2",
+          "Basil",
+          "A"
+        ],
+        [
+          "3",
+          "Cedar",
+          "B"
+        ],
+        [
+          "1",
+          "Alba",
+          "B"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "name",
+        "status"
+      ],
+      "rawFile": "negative-position/actual-target-grid.tsv",
+      "mode": "negative-position",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    },
+    {
+      "rows": [
+        [
+          "5",
+          "Elm",
+          "A"
+        ],
+        [
+          "2",
+          "Basil",
+          "A"
+        ],
+        [
+          "3",
+          "Cedar",
+          "B"
+        ],
+        [
+          "1",
+          "Alba",
+          "B"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "name",
+        "status"
+      ],
+      "rawFile": "negative-pin/actual-target-grid.tsv",
+      "mode": "negative-pin",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    },
+    {
+      "rows": [
+        [
+          "2",
+          "A",
+          "Basil"
+        ],
+        [
+          "5",
+          "A",
+          "Elm"
+        ],
+        [
+          "1",
+          "B",
+          "Alba"
+        ],
+        [
+          "3",
+          "B",
+          "Cedar"
+        ]
+      ],
+      "copiedHeader": false,
+      "columnsExpected": [
+        "id",
+        "status",
+        "name"
+      ],
+      "rawFile": "negative-sort/actual-target-grid.tsv",
+      "mode": "negative-sort",
+      "dialogRows": [
+        {
+          "name": "id",
+          "rect": [
+            607,
+            265,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "status",
+          "rect": [
+            607,
+            288,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "name",
+          "rect": [
+            607,
+            311,
+            90,
+            21
+          ]
+        },
+        {
+          "name": "note",
+          "rect": [
+            607,
+            334,
+            90,
+            21
+          ]
+        }
+      ],
+      "lifecycle": {
+        "exit": 0,
+        "confirmation": true
+      }
+    }
+  ],
+  "databaseRowsUnchanged": true,
+  "sourceFixtureAuthorExit": {
+    "exit": 0,
+    "confirmation": true
+  }
+}

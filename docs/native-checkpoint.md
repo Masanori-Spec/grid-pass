@@ -40,8 +40,8 @@ successful and failed artifacts and member hashes are retained in the private
 verification backup. There is no automatic retry loop or suppressed fatal exit.
 
 This checkpoint verifies the core with original synthetic fixtures. The offline
-UI candidate and its actual browser download require their own fresh browser and
-native acceptance before a completed product claim.
+UI subsequently passed its own actual-browser-output gate; see [release.md](release.md)
+for the separate implementation identity and evidence.
 
 During the UI candidate's separate native-only run `37575833476`, another fresh
 startup failed in `g_type_check_instance_is_a` after the first positive save.

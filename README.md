@@ -1,101 +1,99 @@
 # GridPass
 
-An offline JA/EN tool for selected saved-layout transfer. Open
-`dist/grid-pass.html` locally, choose explicit source and target XML files and
-existing entries, review the changes, then download a new target copy and receipt.
-The native core gate is accepted; this UI candidate still awaits its hosted
-browser, visual and actual-download native verification.
+Copy a selected DBeaver saved column layout into an existing target entry,
+without copying the source's conditions or replacing the target's bindings.
+GridPass is a standalone offline JA/EN tool. It transfers column position,
+visibility, pinning, sort priority and direction, while preserving every byte
+outside the selected layout fields.
 
-The core accepts explicit saved-data-filter.xml bytes and selected source/target
-entry IDs. It transfers only column position, visibility, pinning and sort
-priority to an existing target with the same unique flat column names. Target
-identity, bindings, predicates, opaque values and all other entries stay the
-target's own. It never opens a database, scans a workspace, installs files, runs
-SQL or copies a source expression. The output is a new target copy and receipt.
+[Download the standalone HTML](dist/grid-pass.html) and open it locally. No
+installation, account, database connection or hosting is required.
 
-DBeaver reads Java-serialized values internally. GridPass never invokes Java
-deserialization: pin strings are matched against a finite whitelist of canonical
-Integer values 0–255 emitted by the verified official bundled JDK. Other target
-values remain opaque and unchanged. This does not certify an entire file as safe
-to load in DBeaver. Use trusted target files and close DBeaver before manually
-applying a reviewed copy; its delayed save can overwrite external edits.
+## Use
 
-## Native evidence and pending gate
+1. Start with trusted `saved-data-filter.xml` copies containing existing saved
+   entries. DBeaver's **Save as default filter** creates those native entries.
+2. Choose the source and target files explicitly, then select an entry on each
+   side. You can choose the same file on both sides. GridPass never guesses an
+   object ID, scans a workspace or constructs a new native entry.
+3. Review the exact identities, before/after column arrangement and per-column
+   changes. Names must match exactly, including their corresponding bindings.
+4. Download the target copy and its JSON receipt. Keep the original as a backup.
+   Apply the reviewed copy manually only while DBeaver is closed; its delayed
+   save can otherwise overwrite external changes. The tool never applies files.
 
-The bounded compatibility checkpoint passed at
-`50c88a5730ceaacf0847a93da00b324dbf2ffb59`, in
-[run 37565607740](https://github.com/Masanori-Spec/grid-pass/actions/runs/37565607740).
-The official DBeaver Community Edition 26.2.2 GUI loaded the pinned local
-SQLite JDBC 3.53.4.0 driver in a disposable profile. All five original rows were
-copied from the real native grid, all 256 JDK Integer encodings matched, and the
-application exited normally with code 0 and no fatal native log marker. Real
-accessibility trees and screenshots were independently reviewed. The earlier
-forced-cleanup crash and harness lookup/race failures do not establish a layout
-result; the accepted lifecycle checkpoint is identified separately here.
+The source remains read-only. The target's object ID, bindings, conditions,
+opaque values, other options and unselected entries remain unchanged. An
+unchanged layout produces a byte-identical copy. Receipts record input/output
+hashes, selected identities and every before/after column setting.
 
-The current hosted gate must author source, target and unrelated layouts through
-real GUI cell filters, layout controls and Save as default filter. Target's
-native NOT_EQUALS/String C predicate and different column metadata are
-preservation sentinels. After normal close, the production core patches only the
-existing target entry. The unchanged native file loader must show exact target
-rows/column order, save, exit and reload in a fresh process. Visibility, position,
-pin and sort fault controls must each show their precise native effect and fail
-the positive oracle. This full native gate passed at
-[run 37571921415, attempt 2](https://github.com/Masanori-Spec/grid-pass/actions/runs/37571921415/attempts/2).
-See [the exact native checkpoint and failed-attempt history](docs/native-checkpoint.md).
-The UI candidate still requires a fresh actual-browser-output native pass.
+![Desktop review](docs/evidence/browser/01-en-desktop.png)
 
-The test opens only original synthetic SQLite fixtures in the hosted runner.
-Official binaries and the compiler output remain test-only and are excluded
-from source packages and workflow artifacts. There is no native validation
-endpoint for arbitrary user files. See [the full contract](docs/native-contract.md).
+## Bounded input and privacy
 
-## Supported core profile
+- UTF-8 XML 1.0, up to 4 MiB per file, 512 saved entries and 256 ordinary flat
+  columns in a selected entry. Positions are a complete zero-based permutation.
+- Exact unique column/binding names, unique active sort priorities and visible,
+  distinct pin indices. Valid gaps in pin indices are preserved.
+- Pin strings must match the finite canonical Java Integer 0–255 whitelist.
+  **GridPass never Java-deserializes input.** Other target values stay opaque.
+- Unknown selected structures, DTD/entity declarations, namespaces, ambiguous
+  identities and noncanonical pins fail closed. Quoted-name distinctions and
+  nested/pseudo-column layouts are outside the supported profile.
+- The inert parser bounds depth, elements, attributes and tokens before DOM
+  parsing. No SQL execution, source-expression copying, network request, native
+  launch, automatic installation or real workspace access is part of the tool.
 
-Run `npm ci --ignore-scripts` and `npm test` for 75 core checks. Run
-`python3 scripts/verify-layout.py selftest` for the independent protected-byte
-oracle's nine fault controls. Inputs require
-XML 1.0/UTF-8, at most 4 MiB per file, bounded XML depth/elements, and at most 256
-ordinary flat columns in a selected entry. Names must exactly equal referenced
-native binding names; quoted-name distinctions are currently unsupported.
-The advancing XML lexer caps names at 128 characters, attributes at 64 per
-element and 120,000 total, and lexical tokens at 80,000. Malformed and large
-inputs have isolated timeout/memory regressions; markup in comments stays inert.
-Positions are a complete zero-based permutation, active sort priorities are
-unique, and pin indices are distinct whitelist values. Valid pin gaps are
-preserved. Unknown selected structures, DTD/entity declarations, ambiguous
-identities and noncanonical pin strings fail closed. This is not database schema
-validation or a whole-file safety check.
+This is not database-schema validation or a whole-file security certification.
+Existing serialized target values are preserved, not sanitized. Use trusted
+files. Imported content is rendered as text, retained only in page memory, and
+excluded from the clean offline-tool copy. Changed selections and delayed reads
+or hash jobs cannot reuse an old confirmation, receipt or download.
 
-The product patch preserves protected bytes; subsequent native saves are checked
-for protected semantics, not whole-file byte identity. In the observed native
-save, unopened source/unrelated bindings lose their explicit
-`isPseudoAttribute="false"` field; the gate permits only that exact omission.
-Original code and
-synthetic fixture content have no reuse license grant. Existing third-party
-ownership notices apply only to their dependencies:
+## Verified behavior
+
+The implemented UI and its actual browser download were independently accepted
+at `804bbe986a49c19fa26fecfd4222b1351f1ccaac`:
+
+- [Browser → official DBeaver gate](https://github.com/Masanori-Spec/grid-pass/actions/runs/37577834267):
+  34 browser cases, exact downloaded XML/receipt routing, native GUI load,
+  save/fresh reopen and four exact fault controls
+- [Native-only gate](https://github.com/Masanori-Spec/grid-pass/actions/runs/37577834260):
+  the same six native cases; both runs together have 14 clean native exits
+- 75 core tests, nine independent byte/normalization fault controls, bounded
+  startup-helper checks, sandboxed Chrome 154.0.8037.57, no page/console errors
+  and no application network requests
+- JA/EN desktop and 320/390px mobile review, keyboard file chooser/export/reset,
+  reachable table columns, same-file reselection, stale asynchronous operations,
+  clean offline reopen and complete one-page fixture print reviews
+
+Native testing uses official DBeaver CE 26.2.2, its verified bundled Java and
+pinned Xerial SQLite JDBC 3.53.4.0 with original synthetic data only. Arbitrary
+user files are never submitted to the native test consumer. No vendor binaries,
+compiled classes, database files, profiles or credentials are shipped.
+
+The product output preserves protected bytes. Later native saves omit exactly
+eight explicit false pseudo-column flags on unopened source/unrelated bindings
+in the fixture; all other protected semantics remain exact. Prior native
+verification attempts also encountered GTK startup crashes. Their cause is
+unestablished and their failures remain recorded. The bounded X11 startup
+settling change is an experiment, not a proven native crash fix or a general
+stability guarantee.
+
+See [release evidence and limits](docs/release.md),
+[the native checkpoint and failed attempts](docs/native-checkpoint.md),
+[the acceptance contract](docs/native-contract.md), and
+[exact evidence provenance](docs/evidence-provenance.json).
+
+## Development
+
+Use Node 22. `npm ci --ignore-scripts`, `npm run verify`,
+`python3 scripts/verify-layout.py selftest`, and
+`python3 test/startup-diagnostics.py` cover the local source checks.
+`npm run build` reproducibly writes `dist/grid-pass.html`. Browser and native GUI
+checks run in the hosted workflows with the sandbox enabled and disposable
+synthetic workspaces.
+
+Original code and synthetic fixtures have no reuse license grant. Dependency
+ownership and license notices apply only to their dependencies:
 [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
-
-## Offline UI candidate
-
-Files are processed in the browser without database access, network requests,
-workspace scanning or native software execution. Choose each entry explicitly.
-The review shows zero-based positions and pin indices, visibility, sort priority
-and direction, before/after visible order, and the exact selected identities.
-Changes invalidate prior confirmation and receipts; delayed imports and hash
-jobs cannot restore an older selection. The clean offline-tool download omits
-imported files and names. Printing includes the selected identities and columns.
-
-The native harness now waits for a bounded stable X11 window before startup
-accessibility traversal, following the recorded GTK failures. This is a timing
-experiment, not an established native crash fix; fatal errors still fail and
-only safe current-thread diagnostic frames are retained.
-
-The browser workflow checks sandboxed Chrome, JA/EN desktop and 320/390px layouts,
-keyboard actions, blocked input and asynchronous races, print output and an
-offline reopen. Its actual XML download is passed byte-for-byte into the official
-DBeaver synthetic GUI gate, including fresh native authoring and all four fault
-controls. This candidate's runtime and screenshots are not yet accepted.
-
-Build with `npm run build`; run `npm run verify` for the core plus reproducible
-standalone build. Browser/native execution belongs in the hosted workflows.

@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "integers": 256,
+  "source": "Fixed Integer0\u2013255 ObjectOutputStream generator executed by the verified official DBeaver bundled JDK",
+  "sha256": "e8e0f7836790451dc4b4614f69ca3caf9fbc4b808122df6d13cc291e367e22c7",
+  "noObjectInputStream": true
+}

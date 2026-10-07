@@ -10,8 +10,8 @@ No exhaustive uniqueness claim is made.
 
 The bounded GUI/SQLite bootstrap and full native core gate passed (see
 [native-checkpoint.md](native-checkpoint.md)). The UI workflow repeats the full
-layout gate below with its actual downloaded XML. UI completion remains gated
-on that fresh browser and native evidence.
+layout gate below with its actual downloaded XML. The accepted UI run is recorded
+in [release.md](release.md); the same requirements remain mandatory.
 
 ## Required full gate
 

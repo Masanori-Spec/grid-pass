@@ -1,0 +1,9 @@
+{
+  "origin": "Actual sandboxed offline browser download, routed byte-for-byte into the unchanged native layout/four-fault oracle",
+  "testedHTMLSHA256": "aa8709a6772f5db5031a439771332d1acc0d6f0e5d8bddbeea388c86915c6ca5",
+  "sourceSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "targetSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "browserOutputSHA256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639",
+  "browserReceiptSHA256": "709e1dc26e4d43b1ff6fb4781b8832115a61bca1e9df083aa3aaf058546f1921",
+  "bytes": 4408
+}

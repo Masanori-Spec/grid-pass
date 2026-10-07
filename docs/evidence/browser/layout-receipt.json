@@ -1,0 +1,122 @@
+{
+  "tool": "GridPass",
+  "version": "0.1.0",
+  "exportOrigin": "browser UI download",
+  "sourceId": "GridPass Fixture@@/@@source_table",
+  "targetId": "GridPass Fixture@@/@@target_table",
+  "columns": [
+    {
+      "name": "id",
+      "before": {
+        "name": "id",
+        "position": 0,
+        "visible": true,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": null
+      },
+      "after": {
+        "name": "id",
+        "position": 0,
+        "visible": true,
+        "sortPriority": 2,
+        "descending": true,
+        "pinIndex": 0
+      },
+      "changed": true
+    },
+    {
+      "name": "name",
+      "before": {
+        "name": "name",
+        "position": 1,
+        "visible": true,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": 0
+      },
+      "after": {
+        "name": "name",
+        "position": 2,
+        "visible": true,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": null
+      },
+      "changed": true
+    },
+    {
+      "name": "status",
+      "before": {
+        "name": "status",
+        "position": 2,
+        "visible": true,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": null
+      },
+      "after": {
+        "name": "status",
+        "position": 1,
+        "visible": true,
+        "sortPriority": 1,
+        "descending": false,
+        "pinIndex": null
+      },
+      "changed": true
+    },
+    {
+      "name": "note",
+      "before": {
+        "name": "note",
+        "position": 3,
+        "visible": true,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": null
+      },
+      "after": {
+        "name": "note",
+        "position": 3,
+        "visible": false,
+        "sortPriority": null,
+        "descending": false,
+        "pinIndex": null
+      },
+      "changed": true
+    }
+  ],
+  "preserved": [
+    "target objectId",
+    "target bindings",
+    "target predicates and expressions",
+    "target opaque values and other options",
+    "all other target entries"
+  ],
+  "omitted": [
+    "source predicates",
+    "source expressions",
+    "source bindings",
+    "source opaque values and other options"
+  ],
+  "pinEncoding": "Exact finite canonical Integer0–255 whitelist; no Java deserialization",
+  "changedColumns": 4,
+  "sourceBytes": 4325,
+  "targetBytes": 4325,
+  "outputBytes": 4408,
+  "warning": "Apply a reviewed copy only while DBeaver is closed. Opaque target values are unchanged, not security-certified.",
+  "sourceFile": {
+    "name": "private-source.xml",
+    "bytes": 4325,
+    "sha256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4"
+  },
+  "targetFile": {
+    "name": "private-target.xml",
+    "bytes": 4325,
+    "sha256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4"
+  },
+  "sourceSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "targetSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "inputSHA256": "81ce1b826a09fc351188fc43554961e017bf80dd14ba40a1373c5f8c75c8a5c4",
+  "outputSHA256": "e65c4d1585e31ee1ba7c1f7b8292452ed61654a57e8250883aec0c386b3f2639"
+}

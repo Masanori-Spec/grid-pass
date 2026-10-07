@@ -1,0 +1,13 @@
+{
+  "method": "X11 window identity/title/geometry before accessibility traversal",
+  "elapsedSeconds": 12.448,
+  "minimumStartupSeconds": 12,
+  "minimumStableWindowSeconds": 6,
+  "timeoutSeconds": 60,
+  "window": {
+    "windowId": "6291471",
+    "title": "DBeaver 26.2.2 - unrelated_table",
+    "geometry": "WINDOW=6291471\nX=2\nY=40\nWIDTH=1500\nHEIGHT=950\nSCREEN=0\n"
+  },
+  "scope": "Timing experiment after native startup crashes; trigger and causality are not established"
+}
