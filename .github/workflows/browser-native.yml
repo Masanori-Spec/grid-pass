@@ -20,6 +20,7 @@ jobs:
         run: |
           npm run verify
           python3 scripts/verify-layout.py selftest
+          python3 test/startup-diagnostics.py
           git diff --exit-code -- dist/grid-pass.html
       - name: Actual sandboxed offline browser downloads and review flows
         env:

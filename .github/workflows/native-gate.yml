@@ -18,6 +18,7 @@ jobs:
           npm ci --ignore-scripts
           npm test
           python3 scripts/verify-layout.py selftest
+          python3 test/startup-diagnostics.py
       - name: Standard hosted GUI and accessibility tools
         run: |
           sudo apt-get update
