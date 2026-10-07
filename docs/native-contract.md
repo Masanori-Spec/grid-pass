@@ -57,3 +57,13 @@ services are needed. Original fixtures/code have no reuse license grant.
 Primary source: [DataFilterRegistry](https://github.com/dbeaver/dbeaver/blob/5171a0a5864591ee78225a216586fd7535b15085/plugins/org.jkiss.dbeaver.ui.editors.data/src/org/jkiss/dbeaver/ui/controls/resultset/DataFilterRegistry.java),
 [FilterSettingsDialog](https://github.com/dbeaver/dbeaver/blob/5171a0a5864591ee78225a216586fd7535b15085/plugins/org.jkiss.dbeaver.ui.editors.data/src/org/jkiss/dbeaver/ui/controls/resultset/FilterSettingsDialog.java),
 [CLI](https://dbeaver.com/docs/dbeaver/Command-Line/).
+
+The local JDBC registration uses the pinned source's
+`-Ddbeaver.drivers.configuration-file` option. A provided custom local library
+disables the driver's noncustom default Maven libraries; the clean disposable
+profile has no later user-driver overrides. The probe requires no downloaded
+profile jars and exact original rows copied from the native grid. See
+[DataSourceProviderRegistry](https://github.com/dbeaver/dbeaver/blob/5171a0a5864591ee78225a216586fd7535b15085/plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/DataSourceProviderRegistry.java)
+and [DriverDescriptorSerializerLegacy](https://github.com/dbeaver/dbeaver/blob/5171a0a5864591ee78225a216586fd7535b15085/plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/driver/DriverDescriptorSerializerLegacy.java).
+The test-only whitelist generator writes fixed trusted Integers through
+ObjectOutputStream; it accepts no arguments and never reads serialized objects.

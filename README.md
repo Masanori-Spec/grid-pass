@@ -33,3 +33,18 @@ No original code or fixture reuse license is granted. DBeaver and SQLite JDBC
 remain owned and licensed by their respective authors; test-only binaries are
 downloaded into the hosted runner and are not included in this source package
 or its workflow artifacts.
+
+The first hosted diagnostic reached the actual Product Configuration wizard at
+`d5a46cd82554e93c15318c81e09097279bff00d9`, in
+[run37559818088](https://github.com/Masanori-Spec/grid-pass/actions/runs/37559818088).
+It recorded Temurin25.0.4.1+1 and real native accessibility/pixels. Its log also
+contains a native crash near forced cleanup; this is startup observation, not
+clean lifecycle or layout acceptance.
+
+The next probe registers only the verified local JDBC jar through DBeaver's
+provided-driver configuration, completes the visible first-run wizard without
+sample creation or usage sharing, and checks literal rows copied from the real
+table grid. It captures the native filter dialog and requires normal application
+exit before writing a success record. It also generates all256 fixed Integer
+encodings with the verified bundled JDK. These checks remain pending execution;
+they do not replace the full layout-transfer and negative-control gate.
