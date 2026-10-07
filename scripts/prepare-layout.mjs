@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {inspectConfiguration,transferLayout} from '../src/core.mjs';
+import {PIN_VALUES} from '../src/pinned-values.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const art=path.join(root,'artifacts/native'),original=fs.readFileSync(path.join(art,'original-saved-data-filter.xml'));
+assert.deepEqual(JSON.parse(fs.readFileSync(path.join(art,'canonical-pins.json'),'utf8')),PIN_VALUES);
+const ids=inspectConfiguration(original).entries;
+function existing(table){const result=ids.filter(id=>id.endsWith('@@/@@'+table));if(result.length!==1)throw Error('Missing/ambiguous actual native entry '+table);return result[0];}
+const sourceId=existing('source_table'),targetId=existing('target_table');
+const result=transferLayout(original,original,sourceId,targetId);
+const hash=b=>createHash('sha256').update(b).digest('hex');
+fs.mkdirSync(path.join(art,'variants'),{recursive:true});
+fs.writeFileSync(path.join(art,'variants/positive.xml'),result.bytes);
+fs.writeFileSync(path.join(art,'layout-receipt.json'),JSON.stringify({...result.receipt,inputSHA256:hash(original),outputSHA256:hash(result.bytes)},null,2)+'\n');
+if(hash(original)!==hash(fs.readFileSync(path.join(art,'original-saved-data-filter.xml'))))throw Error('Original fixture changed');
+console.log('Actual native fixture passed through the production byte-patch core');

@@ -8,8 +8,8 @@ or account-backed project sync is a different existing route. This proposal
 addresses only explicit entry-to-entry transfer of selected layout properties.
 No exhaustive uniqueness claim is made.
 
-This initial workflow is a bounded GUI/SQLite bootstrap probe. It cannot unlock
-product UI work. Full feasibility requires the following additional proof.
+The bounded GUI/SQLite bootstrap passed. The current workflow attempts the full
+layout gate below. Product UI stays locked until the actual full evidence passes.
 
 ## Required full gate
 
@@ -27,6 +27,15 @@ descending. Target has its own predicate, bindings and different initial layout.
 The unrelated entry is a preservation sentinel. Discover the actual emitted
 configuration path inside the disposable workspace; do not guess objectId.
 
+The fixed source predicate is authored from the native id=2 cell with the
+Cell value action id>2. The target uses status<>'C' through its native cell
+action, yielding NOT_EQUALS plus an opaque serialized String C. The unrelated
+table has its own status='C' filter. Target name uses VARCHAR(40), while the
+source uses TEXT, so copying source bindings would be detectable. The target
+starts with name pinned and all four columns visible. Expected final target IDs
+are [5,2,3,1]. Scope the no-leak check to the selected target; the source entry
+itself remains in the original file and must stay unchanged.
+
 After normal application exit and completed native persistence, apply the
 product's copy to the existing target entry. Reopen the actual target table in a
 fresh DBeaver process. Verify visible grid order, pinned state, hidden note and
@@ -38,6 +47,13 @@ Four separate controls must change visibility, position, pinning and sort
 direction and visibly alter the expected native result. An independent oracle
 checks exact non-layout target subtrees and all unrelated entries, and proves
 the source predicate never appears in target output.
+
+The four faults are: show note; swap name/status positions; add name as second
+pin1 while retaining id pin0; and make id sort ascending. The pin fault must
+change the actual grid to id,name,status while its visual-position dialog stays
+id,status,name,note. The position fault changes both. Original predicate/value
+bytes and other entries remain unchanged in every variant. After native save,
+protected semantics are checked separately from product byte preservation.
 
 ## Product limits
 

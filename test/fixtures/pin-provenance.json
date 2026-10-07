@@ -1,0 +1,10 @@
+{
+  "nativeCommit": "42b311c47183d9c06d874d7cd9d43f23eedbcebb",
+  "run": 37563519486,
+  "artifactId": 11457563582,
+  "artifactSHA256": "52f527d068b98a7a8962d74bb595b712877ae19fec4c83b25bc6c5eef105ec6f",
+  "member": "canonical-pins.json",
+  "sha256": "e8e0f7836790451dc4b4614f69ca3caf9fbc4b808122df6d13cc291e367e22c7",
+  "java": "OpenJDK Runtime Environment Temurin-25.0.4.1+1 (build25.0.4.1+1-LTS)",
+  "scope": "Official bundled JDK serialized only fixed trusted Integer0\u2013255 values. No ObjectInputStream; no arbitrary input accepted. Native layout proof remains separate."
+}
